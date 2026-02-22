@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Loading Animations</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="container">
+    <!-- Row 1: First 5 loaders -->
+    <div class="loader-row">
+      <div class="loader-section">
+        <div class="wrapper"><span></span></div>
+      </div>
+      <div class="loader-section">
+        <div class="animation"><span></span><span></span><span></span><span></span><span></span></div>
+      </div>
+      <div class="loader-section">
+        <div class="wrapper-dots"><span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="dot"></span></div>
+      </div>
+      <div class="loader-section">
+        <div class="spinner-box"><div class="spinner"></div></div>
+      </div>
+      <div class="loader-section">
+        <div class="border-loader"><div class="border-container active"><span class="overlay" id="percent">0%</span></div></div>
+      </div>
+    </div>
+    
+    <!-- Row 2: Next 5 loaders -->
+    <div class="loader-row">
+      <div class="loader-section">
+        <div class="circular-loader"><div class="circular-progress"><span class="progress-value">0%</span></div><span class="text">Loading</span></div>
+      </div>
+      <div class="loader-section">
+        <div class="dots-loader"><span style="--i:1;"></span><span style="--i:2;"></span><span style="--i:3;"></span><span style="--i:4;"></span><span style="--i:5;"></span><span style="--i:6;"></span><span style="--i:7;"></span><span style="--i:8;"></span><span style="--i:9;"></span><span style="--i:10;"></span><span style="--i:11;"></span><span style="--i:12;"></span><span style="--i:13;"></span><span style="--i:14;"></span><span style="--i:15;"></span></div>
+      </div>
+      <div class="loader-section">
+        <div class="ball-loader"><div class="upper ball"></div><div class="right ball"></div><div class="lower ball"></div><div class="left ball"></div></div>
+      </div>
+      <div class="loader-section">
+        <input type="checkbox" id="check-loader"><label for="check-loader"><div class="check-icon"></div></label>
+      </div>
+      <div class="loader-section">
+        <div class="screen-loader"><div class="ring"></div></div>
+      </div>
+    </div>
+    
+    <!-- Row 3: Remaining 5 loaders -->
+    <div class="loader-row">
+      <div class="loader-section">
+        <div class="skeleton-card"><div class="header"><div class="img"></div><div class="details"><span class="name"></span><span class="about"></span></div></div><div class="description"><div class="line line-1"></div><div class="line line-2"></div><div class="line line-3"></div></div><div class="btns"><div class="btn btn-1"></div><div class="btn btn-2"></div></div></div>
+      </div>
+      <div class="loader-section">
+        <div class="windows-loader"><div class="win-wrapper"><div class="win-loader"><div class="win-dot"></div></div><div class="win-loader"><div class="win-dot"></div></div><div class="win-loader"><div class="win-dot"></div></div><div class="win-loader"><div class="win-dot"></div></div><div class="win-loader"><div class="win-dot"></div></div><div class="win-loader"><div class="win-dot"></div></div></div><div class="win-text">Please wait</div></div>
+      </div>
+      <div class="loader-section">
+        <div class="heart-preloader"><div class="heart-shape"><span></span><span></span><span></span></div><div class="heart-shadow"></div></div>
+      </div>
+      <div class="loader-section">
+        <div class="gradient-ring"><div class="gradient-outer" id="gradientOuter"><div class="gradient-inner"><span id="gradientPercent">0%</span></div></div></div>
+      </div>
+      <div class="loader-section">
+        <div class="color-ring"><div class="color-ring-anim"></div><span>loading...</span></div>
+      </div>
+    </div>
+  </div>
+  
+  <script>
+    const borderContainer = document.querySelector(".border-container");
+    const borderPercent = document.querySelector("#percent");
+    let perVal = 0;
+    let increament = setInterval(() => {
+      perVal++;
+      borderPercent.textContent = perVal + '%';
+      if (perVal == 100) { clearInterval(increament); borderContainer.classList.remove("active"); }
+    }, 100);
+    
+    let circularProgress = document.querySelector(".circular-progress");
+    let progressValue = document.querySelector(".progress-value");
+    let progressStartValue = 0, progressEndValue = 90, speed = 100;
+    let progress = setInterval(() => {
+      progressStartValue++;
+      progressValue.textContent = progressStartValue + '%';
+      circularProgress.style.background = 'conic-gradient(#7d2ae8 ' + (progressStartValue * 3.6) + 'deg, #ededed 0deg)';
+      if(progressStartValue == progressEndValue) clearInterval(progress);
+    }, speed);
+    
+    let gradientOuter = document.querySelector("#gradientOuter");
+    let gradientPercent = document.querySelector("#gradientPercent");
+    let gradientCount = 0;
+    let gradientLoading = setInterval(function(){
+      if(gradientCount == 100){
+        gradientOuter.classList.remove("active-loader");
+        gradientOuter.classList.add("active-loader-2");
+        clearInterval(gradientLoading);
+      }else{
+        gradientCount = gradientCount + 1;
+        gradientPercent.textContent = gradientCount + '%';
+        gradientOuter.classList.add("active-loader");
+      }
+    },200);
+  </script>
+</body>
+</html>
